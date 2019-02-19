@@ -1,0 +1,26 @@
+{
+  "name": "logtis",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "postinstall": "install-app-deps",
+    "start": "electron .",
+    "rebuild": "electron-rebuild -f -w sqlite3"
+  },
+  "author": "leonardopicoli",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^3.0.13",
+    "electron-packager": "^13.0.1",
+    "electron-rebuild": "^1.8.2"
+  },
+  "dependencies": {
+    "angular": "^1.7.5",
+    "highcharts": "^6.2.0",
+    "node-gyp": "^3.8.0",
+    "read-excel-file": "^2.0.5",
+    "sqlite3": "^4.0.4",
+    "xlsx-to-json": "^0.3.0"
+  }
+}

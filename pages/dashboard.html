@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html ng-app="dashApp">
+  <head>
+    <script src="../js/lib/angular.min.js"></script>
+    <script src="../js/dashboard-controller.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../styles/dashboard-style.css">
+    <meta charset="UTF-8">
+
+    <title>Logtis</title>
+  </head>
+  <body ng-controller="DashboardController as dashboard">
+    <section>
+      <!--for demo wrap-->
+      <h1>Últimas Fórmulas</h1>
+      <img src="../others/vollmens.png" width="200" height="70" style="position: absolute;top: 25px;right: 53px;">
+      <div class="tbl-header">
+        <table cellpadding="0" cellspacing="0" border="0">
+          <COLGROUP>
+            <COL width="10%">
+            <COL width="35%">
+            <COL width="10%">
+            <COL width="15%">
+            <COL width="10%">
+            <COL width="15%">
+            <COL width="5%">
+          </COLGROUP>
+          <thead>
+            <tr>
+              <th>
+                <input type="text" name="input-text-code" ng-change="dashboard.filter_inputs()" 
+                ng-model="dashboard.code_input" placeholder="Código"/>
+              </th>
+              <th>
+                <input type="text" name="input-text-code" ng-change="dashboard.filter_inputs()"
+                ng-model="dashboard.formula_name_input" placeholder="Nome da fórmula"/>
+              </th>
+              <th>Grupo</th>
+              <th>Número de substâncias</th>
+              <th>LogP</th>
+              <th colspan="2">Vapor pressure</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div class="tbl-content">
+        <table cellpadding="0" cellspacing="0" border="0">
+          <COLGROUP>
+            <COL width="10%">
+            <COL width="35%">
+            <COL width="10%">
+            <COL width="15%">
+            <COL width="10%">
+            <COL width="15%">
+            <COL width="5%">
+          </COLGROUP>
+          <tbody>
+            <tr ng-repeat="formula in dashboard.filtered_created_formulas" ng-click="dashboard.view_formula(formula)">
+              <td>{{formula.code}}</td>
+              <td>{{formula.formula_name}}</td>
+              <td>{{formula.group_name}}</td>
+              <td>{{formula.number_of_ingredients}}</td>
+              <td>{{formula.logp}}</td>
+              <td>{{formula.vapor_pressure}}</td>
+              <td><button class="remove-formula-button" ng-click="dashboard.remove_formula(formula)">X</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="new-formula-content">
+      <button class="new-formula-button" ng-click="dashboard.new_formula()">Nova fórmula</button>
+    </div>
+
+    <!-- follow me template
+    <div class="made-with-love">
+      Made with
+      <i>♥</i> by
+      COLOCAR LINKEDIN DPS
+      <a target="_blank" href="https://www.facebook.com/lgpicoli">Leonardo Picoli</a>
+    </div>-->
+  </body>
+</html>
