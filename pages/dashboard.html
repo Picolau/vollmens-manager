@@ -3,17 +3,21 @@
   <head>
     <script src="../js/lib/angular.min.js"></script>
     <script src="../js/dashboard-controller.js"></script>
+    <script src="../js/lib/jquery.js" type="text/javascript"></script>
 
+    <link rel="stylesheet" type="text/css" href="../styles/lib/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../styles/lib/flexboxgrid.min.css">
+    
+    <link rel="stylesheet" type="text/css" href="../styles/global.css">
     <link rel="stylesheet" type="text/css" href="../styles/dashboard-style.css">
     <meta charset="UTF-8">
 
-    <title>Logtis</title>
+    <title>Vollmens Manager</title>
   </head>
   <body ng-controller="DashboardController as dashboard">
     <section>
-      <!--for demo wrap-->
-      <h1>Últimas Fórmulas</h1>
-      <img src="../others/vollmens.png" width="200" height="70" style="position: absolute;top: 25px;right: 53px;">
+      <h1 class="section-title">Últimas Fórmulas</h1>
+      <img src="../assets/img/vollmens.png" width="200" height="70" style="position: absolute;top: 25px;right: 53px;">
       <div class="tbl-header">
         <table cellpadding="0" cellspacing="0" border="0">
           <COLGROUP>
@@ -62,7 +66,7 @@
               <td>{{formula.number_of_ingredients}}</td>
               <td>{{formula.logp}}</td>
               <td>{{formula.vapor_pressure}}</td>
-              <td><button class="remove-formula-button" ng-click="dashboard.remove_formula(formula)">X</button></td>
+              <td><button class="remove-formula-button" ng-click="dashboard.remove_formula(formula)">&times;</button></td>
             </tr>
           </tbody>
         </table>

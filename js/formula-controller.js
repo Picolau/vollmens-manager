@@ -1,6 +1,6 @@
 let app = angular.module('dashApp', []);
 
-app.controller('FormulaController', function($scope) {
+app.controller('FormulaController', function($scope, $timeout) {
     /****************************************************************************************************/
     /****************************************VARIÁVEIS E FUNÇÕES AUXILIARES******************************/
     /****************************************************************************************************/
@@ -521,8 +521,12 @@ app.controller('FormulaController', function($scope) {
     //funcao caso clique no '+' para adicionar uma substancia à formula
     f_controller.new_formula_substance = () => {
       //simplesmente dá unsfhit em uma nova formula_substance
-      f_controller.formula_substances.unshift(new_obj_formula_substance());
+      //f_controller.formula_substances.unshift(new_obj_formula_substance());
+      f_controller.formula_substances.push(new_obj_formula_substance());
       f_controller.saved_everything = false;
+      $timeout(function() {
+        $('.tbl-content').scrollTop($('.tbl-content')[0].scrollHeight+500);
+      }, 1)
     }
 
     // funcao para controlar que a formula_substance perdeu foco (seja em code, name ou parts)
@@ -606,7 +610,7 @@ app.controller('FormulaController', function($scope) {
     }
 
     // caso o usuario fica com o mouse em cima do alert (espera 500ms para mostrar a mensagem)
-    f_controller.show_info_message = (obj_formula_substance) => {
+    f_controller.show_info_message_delay = (obj_formula_substance) => {
       clearInterval(info_message_interval);
 
       info_message_interval = setInterval(() => {
@@ -614,11 +618,26 @@ app.controller('FormulaController', function($scope) {
         $scope.$apply();
       }, 500);
     }
+    
+    f_controller.show_info_message = (obj_formula_substance) => {
+      clearInterval(info_message_interval);
+      
+      obj_formula_substance.info_message.is_showing = true;
+    }
 
     // esconde a info message caso o alert perca o foco do mouse
-    f_controller.hide_info_message = (obj_formula_substance) => {
-      obj_formula_substance.info_message.is_showing = false;
+    f_controller.hide_info_message_delay = (obj_formula_substance) => {
       clearInterval(info_message_interval);
+      
+      info_message_interval = setInterval(() => {
+        obj_formula_substance.info_message.is_showing = false;
+        $scope.$apply();
+      }, 100);
+    }
+    
+    f_controller.hide_info_message = (obj_formula_substance) => {
+      clearInterval(info_message_interval);
+      obj_formula_substance.info_message.is_showing = false;
     }
 
     // caso o usuario pressione enter quando digitar o numero de parts
@@ -672,7 +691,7 @@ app.controller('FormulaController', function($scope) {
 
       // atribuição do identificador da pagina
       page_identifier = page_id;
-
+      
       init_obj_formula_from_api();
     });
 

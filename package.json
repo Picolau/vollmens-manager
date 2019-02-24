@@ -17,9 +17,10 @@
   "dependencies": {
     "angular": "^1.7.5",
     "highcharts": "^6.2.0",
+    "nan": "^2.12.1",
     "node-gyp": "^3.8.0",
     "read-excel-file": "^2.0.5",
-    "sqlite3": "^4.0.4",
+    "sqlite3": "https://github.com/mapbox/node-sqlite3/tarball/master",
     "xlsx-to-json": "^0.3.0"
   }
 }
