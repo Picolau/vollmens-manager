@@ -11,7 +11,7 @@ app.controller('FormulaController', function($scope) {
     //ou caso clique em alguma das tabelas
     const {ipcRenderer} = require('electron')
 
-    const RED_COLOR = 'rgb(255,60,60)';
+    const RED_COLOR = 'rgb(255,120,0)';
     const GREEN_COLOR = 'rgb(0,255,0)';
     const YELLOW_COLOR = 'rgb(255,255,0)';
     const BLUE_COLOR = 'rgb(0,100,255)'
@@ -81,7 +81,20 @@ app.controller('FormulaController', function($scope) {
         if (formula_id) { 
           //faremos a edição desses dados no banco (TODO: observação)
           // nome, group_id, total_parts, number_of_ingredients, logp, vaporp e cdf
-          local_api.update_formula(formula_id, f_controller.obj_formula, f_controller.formula_substances).then(function () {
+          // primeiro, as formulas_substances que devem ser deletadas, devem ser computadas primeiro, no banco de dados. Então, devemos colocar na ordem certa.
+          let formulas_substances_sorted = [];
+
+          for (let i = 0;i < f_controller.formula_substances;i++) {
+            let obj_fs = f_controller.formulas_substances[i];
+            
+            if (obj_fs.action == 'delete') {
+              formulas_substances_sorted.unshift(obj_fs);
+            } else {
+              formulas_substances_sorted.push(obj_fs);
+            }
+          }
+
+          local_api.update_formula(formula_id, f_controller.obj_formula, formulas_substances_sorted).then(function () {
             resolve();
           })
         } else {
@@ -202,11 +215,11 @@ app.controller('FormulaController', function($scope) {
             }
 
             if (obj_fs.group_id == 1) {
-              total_parts_type_A += obj_fs.parts;
+              total_parts_type_A += obj_parts;
             } else if (obj_fs.group_id == 2) {
-              total_parts_type_B += obj_fs.parts;
+              total_parts_type_B += obj_parts;
             } else if (obj_fs.group_id == 3) {
-              total_parts_type_C += obj_fs.parts;
+              total_parts_type_C += obj_parts;
             }
           }
         }
@@ -802,7 +815,7 @@ app.controller('FormulaController', function($scope) {
               }, { // vai pintar com a devida cor de min até max
                   from: ranges.typeC.min,
                   to: ranges.typeC.max,
-                  color: 'rgba(255,60,60,0.5)'
+                  color: 'rgba(255,120,0,0.5)'
               }, {// por fim, vai pintar de transparente novamente de max até 100
                   from: ranges.typeC.max,
                   to: 100,

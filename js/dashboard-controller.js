@@ -25,6 +25,17 @@ angular.module('dashApp', [])
     //variavel para guardar o input do nome da formula caso o usuario queira filtrar por nome
     dashboard.formula_name_input = '';
 
+    let findIndexByFormulaId = function (formulas_list, formula_id) {
+      let index = -1; 
+
+      for (let i = 0;i < formulas_list.length && index == -1;i++) {
+        if (formulas_list[i].formula_id == formula_id) 
+          index = i;
+      }
+
+      return index;
+    }
+
     let init_formulas = () => {
       //inicializa o dashboard com as formulas ja criadas ateh agora
       local_api.select_all_formulas().then(function (rows) {
@@ -55,17 +66,16 @@ angular.module('dashApp', [])
       if (confirm("Tem certeza de que deseja remover essa fórmula permanentemente?")) {
         //aqui estamos removendo primeiro do filtered.
         //achamos o index no vetor de formulas para remover a formula passada pelo dashboard.html pelo angular
-        let index = dashboard.filtered_created_formulas.indexOf(formula);
+        let index = findIndexByFormulaId(dashboard.filtered_created_formulas, formula.formula_id);
 
         //removemos a formula do vetor para rapida atualizacao
         dashboard.filtered_created_formulas.splice(index, 1);
 
         // agora precisamos remover do created_formulas, 
         // ja que os objetos nao sao iguais
-        index = dashboard.created_formulas.indexOf(formula);
+        index = findIndexByFormulaId(dashboard.created_formulas, formula.formula_id);
         dashboard.created_formulas.splice(index, 1);
         
-
         //removemos do banco de dados
         local_api.delete_formula(formula.formula_id);
       }
@@ -123,7 +133,10 @@ angular.module('dashApp', [])
 
     //eh chamado quando a pagina de formulas ganha focus.
     ipcRenderer.on('refresh-formulas', (event) => {
-      init_formulas();
+      setTimeout(function() { 
+        init_formulas(); 
+      }, 500);
+
       console.log("deu refresh");
     });
 
