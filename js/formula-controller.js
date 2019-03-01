@@ -628,11 +628,9 @@ app.controller('FormulaController', function($scope, $timeout) {
     // esconde a info message caso o alert perca o foco do mouse
     f_controller.hide_info_message_delay = (obj_formula_substance) => {
       clearInterval(info_message_interval);
+      obj_formula_substance.info_message.is_showing = false;
       
-      info_message_interval = setInterval(() => {
-        obj_formula_substance.info_message.is_showing = false;
-        $scope.$apply();
-      }, 100);
+      $scope.$apply();
     }
     
     f_controller.hide_info_message = (obj_formula_substance) => {

@@ -61,7 +61,9 @@ function createWindow () {
 ipcMain.on('create-window-formula', (event, formula) => {
   // criamos uma nova janela para criar ou editar formulas
   // caso formula seja null, a propria window saberá que uma nova formula deve ser criada. 
-  let newindow = new BrowserWindow({width: 1024, height: 800})
+  let newindow = new BrowserWindow({width: 1024, height: 800, minWidth: 1024, minHeight: 800, closable: false})
+
+  // impedimos que o usuário set um tamanho menor de tela a nao ser 1024x800 e impedimos que feche simplesmente clicando em fechar (forçamos o usuario a clicar em "sair")
 
   //setamos a URL da pagina para a de formula.html
   newindow.loadFile('./pages/formula.html')
@@ -86,6 +88,7 @@ ipcMain.on('close-window-formula', (event, page_id) => {
   let window_to_close = formula_windows[page_id.toString()];
 
   // fechamos a formula_window
+  window_to_close.setClosable(true);
   window_to_close.close();
   window_to_close = null;
 

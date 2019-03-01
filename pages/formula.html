@@ -17,7 +17,7 @@
   <body ng-controller="FormulaController as f_controller">
     <section class="main-section">
       <!--for demo wrap-->
-      <div class="tbl-action-buttons" style="margin-bottom: 50px;">
+      <div class="tbl-action-buttons" style="margin-bottom: 10px;">
         <table cellpadding="0" cellspacing="0" border="0">
           <COLGROUP>
             <COL width="200px">
@@ -93,15 +93,17 @@
               <!-- INFORMATION OR ALERT AREA CIRCLE -->
               <td ng-mouseover="f_controller.show_info_message_delay(obj_formula_substance)" 
                   ng-mouseout="f_controller.hide_info_message_delay(obj_formula_substance)"
-                  ng-click="f_controller.show_info_message(obj_formula_substance)">
+                  ng-click="f_controller.show_info_message(obj_formula_substance)" style="
+                  background-color:  #053a3e;
+                  border-radius: 4px;
+                  padding-left: 10px;
+              ">
                 <div class="info-circle" ng-click="" ng-show="obj_formula_substance.alert_level == 'light'">i</div>
                 <div class="yellow-alert-circle" ng-click=""ng-show="obj_formula_substance.alert_level == 'medium'">!</div>
                 <div class="red-alert-circle" ng-show="obj_formula_substance.alert_level == 'strong'">!</div>
                 
                 <div class="info-message-box" 
-                ng-show="obj_formula_substance.info_message.is_showing"
-                ng-mouseover=="f_controller.show_info_message(obj_formula_substance)"
-                ng-mouseout="f_controller.hide_info_message_delay(obj_formula_substance)">
+                ng-show="obj_formula_substance.info_message.is_showing">
                   <div class="info-message-line" ng-repeat="text_msg in obj_formula_substance.info_message.text_message">
                     <div class="info-message-title">{{text_msg.title}}</div>
                     <div class="info-message-content">{{text_msg.content}}</div>
@@ -151,7 +153,7 @@
               </td>
 
               <!-- PORCENTAGEM DAS PARTES -->
-              <td>{{obj_formula_substance.percentage}}</td>
+              <td style="text-align: center">{{obj_formula_substance.percentage}}</td>
 
               <!-- COR NOS GRAFICOS -->
               <td>

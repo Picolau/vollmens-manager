@@ -7,37 +7,39 @@ thead th:hover {
 	padding: 20px 0;
 	text-align: center;
 	font-weight: 500;
-	font-size: 16px;
+	font-size: 13px;
 	color: #fff;
 	text-transform: uppercase;
 }
 
 .tbl-content td {
-	padding: 15px;
+	padding: 12px 15px;
 	text-align: left;
 	vertical-align: middle;
 	font-weight: 300;
-	font-size: 16px;
+	font-size: 13px;
 	color: #fff;
 	border-bottom: solid 1px rgba(255, 255, 255, 0.1);
 }
 
 table td input {
 	background-color: transparent;
-	height: 40px;
+	height: 32px;
 	border: none;
 	border-bottom: 2px solid #fff;
 	width: 100%;
 	box-sizing: border-box;
 	font-weight: 500;
-	font-size: 16px;
+	font-size: 13px;
 	color: #fff;
 	text-transform: uppercase;
 }
 
 .graph-color-shower {
-	height: 40px;
-	width: 55px;
+	display: table;
+	margin: 0 auto;
+	height: 30px;
+	width: 45px;
 	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
 }
@@ -67,7 +69,7 @@ button:hover {
 	width: 100%;
 	box-sizing: border-box;
 	font-weight: 500;
-	font-size: 30px;
+	font-size: 23px;
 	color: #fff;
 	text-transform: uppercase;
 }
@@ -76,10 +78,10 @@ button:hover {
     background-color: transparent;
     height: 40px;
     font-weight: 500;
-    font-size: 30px;
+    font-size: 23px;
     color: #fff;
     text-transform: uppercase;
-    padding: 4px 10px 0 0;
+    padding: 11px 10px 0 0;
 }
 
 .div-formula-name-code {
@@ -90,7 +92,7 @@ button:hover {
 	padding: 20px 15px;
 	text-align: left;
 	font-weight: 500;
-	font-size: 16px;
+	font-size: 13px;
 	color: #fff;
 	text-transform: uppercase;
 }
@@ -102,7 +104,7 @@ button:hover {
 	height: 45px;
 	border: solid 2px;
 	font-weight: 500;
-	font-size: 14px;
+	font-size: 13px;
 	font-family: 'Maven Pro Bold', sans-serif;
 	color: #fff;
 	text-transform: uppercase;
